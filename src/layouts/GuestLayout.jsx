@@ -13,14 +13,17 @@ export default function GuestLayout() {
             <a className="transition-colors hover:text-white" href="#hero">
               Home
             </a>
-            <a className="transition-colors hover:text-white" href="#about">
-              About
+            <a className="transition-colors hover:text-white" href="#faq">
+              FAQ
             </a>
             <a className="transition-colors hover:text-white" href="#testimony">
               Testimony
             </a>
-            <a className="transition-colors hover:text-white" href="#faq">
-              FAQ
+            <a className="transition-colors hover:text-white" href="#contact">
+              Contact
+            </a>
+            <a className="transition-colors hover:text-white" href="#about">
+              About
             </a>
           </nav>
 
@@ -35,6 +38,18 @@ export default function GuestLayout() {
       <main className="flex-1 text-slate-100">
         <Outlet />
       </main>
+
+      <footer id="contact" className="border-t border-slate-800 bg-slate-950">
+        <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-8 text-sm md:flex-row md:items-center md:justify-between md:px-8">
+          <div>
+            <p className="font-semibold text-white">Guest Home</p>
+            <p className="mt-1 text-slate-400">
+              A simple place to get started.
+            </p>
+          </div>
+          <p className="text-slate-500">Questions? hello@example.com</p>
+        </div>
+      </footer>
     </div>
   );
 }

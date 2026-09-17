@@ -53,7 +53,7 @@ export default function SignUp() {
             Sudah punya akun?{" "}
             <Link
               to="/sign-in"
-              className="text-white underline hover:text-slate-200"
+              className="text-black underline hover:text-slate-600"
             >
               Sign In di sini
             </Link>

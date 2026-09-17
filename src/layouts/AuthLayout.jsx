@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import illustration from "../assets/illustration.png";
+import illustration from "../assets/illustration.jpg";
 export default function AuthLayout() {
   return (
     <div className="flex min-h-screen w-full bg-slate-950 text-white">

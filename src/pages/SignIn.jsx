@@ -36,9 +36,15 @@ export default function SignIn() {
           <Button type="submit" className="w-full">
             Button Sign-in
           </Button>
-          <Button asChild variant="outline" className="mt-2 w-full">
-            <Link to="/sign-up">Button Sign-up</Link>
-          </Button>
+          <div className="mt-4 text-center text-sm text-slate-400">
+            Belum punya akun?{" "}
+            <Link
+              to="/sign-up"
+              className="text-black underline hover:text-slate-600"
+            >
+              Sign Up di sini
+            </Link>
+          </div>
         </form>
       </CardContent>
     </Card>
