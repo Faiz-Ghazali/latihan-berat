@@ -10,6 +10,8 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import { AuthOnly, GuestOnly } from "./components/AuthGuards";
+import Dashboard2 from "./pages/User/Dashboard2";
+import Myprofile from "./pages/User/Myprofile";
 
 const router = createBrowserRouter([
   // 1. Group Route Guest (Landing Page / Home)
@@ -27,7 +29,6 @@ const router = createBrowserRouter([
       },
     ],
   },
-  // 2. Group Route Auth (Sign-in & Sign-up)
   {
     element: <AuthLayout />,
     children: [
@@ -47,6 +48,13 @@ const router = createBrowserRouter([
           </AuthOnly>
         ),
       },
+      {
+        path: "user",
+        element: (
+          <Dashboard2 />,
+          <Myprofile />
+        )
+      }
     ],
   },
 ]);
