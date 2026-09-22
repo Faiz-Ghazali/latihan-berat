@@ -10,6 +10,7 @@ import SantriList from "./pages/Admin/Santri/SantriList";
 import SantriDetail from "./pages/Admin/Santri/SantriDetail";
 import Dashboard2 from "./pages/User/Dashboard2";
 import Myprofile from "./pages/User/Myprofile";
+
 const router = createBrowserRouter([
   {
     path: "/admin",
@@ -54,15 +55,18 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "user",
-        element: (
-          <Dashboard2 />,
-          <Myprofile />
-        )
-        
-      }
     ],
   },
+  {
+    path: "/user",
+    element: (
+     
+      <>
+        <Dashboard2 />
+        <Myprofile />
+      </>
+    ),
+  },
 ]);
+
 export default router;
