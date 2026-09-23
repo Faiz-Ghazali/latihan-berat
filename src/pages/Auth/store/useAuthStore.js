@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 const MOCK_USER = [
   {
     id: "1",
@@ -8,14 +9,14 @@ const MOCK_USER = [
     role: "admin",
   },
   {
-    id: "12",
+    id: "2",
     email: "user@test.com",
     password: "user123",
     name: "siti",
     role: "user",
   },
 ];
-export const useAuthStore = create((set) => ({
+export const useAuthStore = create(persist((set) => ({
   user: null,
   error: null,
   login: (email, password) => {
@@ -41,4 +42,4 @@ export const useAuthStore = create((set) => ({
   logout: () => {
     set({ user: null, error: null });
   },
-}));
+})));

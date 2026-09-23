@@ -1,31 +1,37 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { Button } from "../components/ui/button";
-import { Input } from "../components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Card,
   CardHeader,
   CardTitle,
   CardContent,
-} from "../components/ui/card";
-import { useAuthStore } from "../store/useAuthStore"; // Import store Zustand kamu
+} from "@/components/ui/card";
+import { useAuthStore } from "../Auth/store/useAuthStore"; 
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  
-  // Mengambil action/state dari Zustand store
-  const login = useAuthStore((state) => state.login); 
+
+  const login = useAuthStore((state) => state.login);
+  const error = useAuthStore((state) => state.error);
+
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    // 1. Jalankan fungsi login dari Zustand (misal menyimpan user & token)
-    login({ email, password });
+    const isSuccess = login(email, password);
 
-    // 2. Redirect ke dashboard setelah login
-    navigate("/dashboard", { replace: true });
+    if (isSuccess) {
+      const currentUser = useAuthStore.getState().user;
+      if (currentUser.role == "admin") {
+        navigate('/admin');
+      } else if (currentUser.role == "user") {
+        navigate('/user/home')
+      }
+    }
   }
 
   return (
@@ -34,6 +40,12 @@ export default function SignIn() {
         <CardTitle className="text-2xl text-center">Sign In</CardTitle>
       </CardHeader>
       <CardContent>
+        {error && (
+          <div className="mb-4 rounded-md bg-red-500/10 p-3 text-center text-sm font-medium text-red-500 border border-red-500/20">
+            {error}
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label className="text-sm font-medium">Email</label>

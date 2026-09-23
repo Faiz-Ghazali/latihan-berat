@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import Home from "./pages/Admin/Home";
 import About from "./pages/Admin/About";
-import AppLayout from "./layouts/coretcoret/AppLayout";
+// import AppLayout from "./layouts/coretcoret/AppLayout";
 import Santri from "./pages/Admin/Santri";
 import SantriLayout from "./layouts/coretcoret/SantriLayout";
 import SantriNilai from "./pages/Admin/Santri/SantriNilai";
@@ -10,11 +10,21 @@ import SantriList from "./pages/Admin/Santri/SantriList";
 import SantriDetail from "./pages/Admin/Santri/SantriDetail";
 import Dashboard2 from "./pages/User/Dashboard2";
 import Myprofile from "./pages/User/Myprofile";
-
+import SignIn from "./pages/Auth/SignIn";
+import HomeDummy from "./pages/HomeDummy";
+import AuthLayout from "./layouts/AuthLayout";
 const router = createBrowserRouter([
   {
+    path: "/",
+    element: <HomeDummy />,
+  },
+  {
+    path:"signin",
+    element: <SignIn />
+  },
+  {
     path: "/admin",
-    element: <AppLayout />,
+    element: <AuthLayout />,
     children: [
       {
         index: true,
@@ -59,13 +69,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element: (
-     
-      <>
-        <Dashboard2 />
-        <Myprofile />
-      </>
-    ),
+    element:<AuthLayout />,
+    children: [
+      {
+        path: '/home',
+        element: (
+          <Myprofile />,
+          <Dashboard2 />
+        ),
+      }
+    ],
+    
   },
 ]);
 
