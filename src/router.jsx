@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import Home from "./pages/Admin/Home";
 import About from "./pages/Admin/About";
-// import AppLayout from "./layouts/coretcoret/AppLayout";
 import Santri from "./pages/Admin/Santri";
 import SantriLayout from "./layouts/coretcoret/SantriLayout";
 import SantriNilai from "./pages/Admin/Santri/SantriNilai";
@@ -13,55 +12,46 @@ import Myprofile from "./pages/User/Myprofile";
 import SignIn from "./pages/Auth/SignIn";
 import HomeDummy from "./pages/HomeDummy";
 import AuthLayout from "./layouts/AuthLayout";
+import { Guard } from "./components/Guard";
+import UserFrom from "./components/UserForm.jsx"
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeDummy />,
   },
   {
-    path:"signin",
-    element: <SignIn />
+    element: <Guard isGuest />,
+    children: [
+      {
+        element: <AuthLayout />,
+        children: [
+          {
+            path: "signin",
+            element: <SignIn />,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/admin",
-    element: <AuthLayout />,
+    element: <Guard role="admin" />,
     children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "about",
-        element: <About />,
-      },
+      { index: true, element: <Home /> },
+      { path: "about", element: <About /> },
       {
         path: "santri",
         element: <SantriLayout />,
         children: [
-          {
-            index: true,
-            element: <Santri />,
-          },
-          {
-            path: "nilai",
-            element: <SantriNilai />,
-          },
+          { index: true, element: <Santri /> },
+          { path: "nilai", element: <SantriNilai /> },
+          { path: "absensi", element: <SantriAbsensi /> },
           {
             path: "list",
             children: [
-              {
-                index: true,
-                element: <SantriList />,
-              },
-              {
-                path: ":santri_id",
-                element: <SantriDetail />,
-              },
+              { index: true, element: <SantriList /> },
+              { path: ":santri_id", element: <SantriDetail /> },
             ],
-          },
-          {
-            path: "absensi",
-            element: <SantriAbsensi />,
           },
         ],
       },
@@ -69,17 +59,20 @@ const router = createBrowserRouter([
   },
   {
     path: "/user",
-    element:<AuthLayout />,
+    element: <Guard role="user" />,
     children: [
       {
-       
+        index: true,
         element: (
-          <Myprofile />,
-          <Dashboard2 />
+          <>
+            
+            <Myprofile />
+            <UserFrom />
+            <Dashboard2 />
+          </>
         ),
-      }
+      },
     ],
-    
   },
 ]);
 

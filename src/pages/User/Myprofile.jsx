@@ -20,8 +20,8 @@ function Myprofile() {
 
         <div className="grid gap-5 pt-6 sm:grid-cols-2">
           <div>
-            <p className="text-sm text-gray-500">Full Name</p>
-            <p className="mt-1 font-medium text-gray-800">User Name</p>
+            <p className="text-sm text-gray-500">John Doe</p>
+            <p className="mt-1 font-medium text-gray-800">johndoue1200</p>
           </div>
           <div>
             <p className="text-sm text-gray-500">Email Address</p>
