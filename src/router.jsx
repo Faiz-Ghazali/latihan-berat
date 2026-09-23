@@ -72,7 +72,7 @@ const router = createBrowserRouter([
     element:<AuthLayout />,
     children: [
       {
-        path: '/home',
+       
         element: (
           <Myprofile />,
           <Dashboard2 />

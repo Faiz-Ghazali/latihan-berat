@@ -29,7 +29,7 @@ export default function SignIn() {
       if (currentUser.role == "admin") {
         navigate('/admin');
       } else if (currentUser.role == "user") {
-        navigate('/user/home')
+        navigate('/user')
       }
     }
   }
