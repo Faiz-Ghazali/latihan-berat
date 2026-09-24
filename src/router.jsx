@@ -1,91 +1,100 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate, Outlet } from "react-router";
+import { useAuthStore } from "./pages/Auth/store/useAuthStore";
+
 import Home from "./pages/Admin/Home";
 import About from "./pages/Admin/About";
 import Santri from "./pages/Admin/Santri";
-import SantriLayout from "./layouts/coretcoret/SantriLayout";
+import SantriLayout from "./layouts/SantriLayout";
 import SantriNilai from "./pages/Admin/Santri/SantriNilai";
 import SantriAbsensi from "./pages/Admin/Santri/SantriAbsensi";
 import SantriList from "./pages/Admin/Santri/SantriList";
 import SantriDetail from "./pages/Admin/Santri/SantriDetail";
-import Dashboard2 from "./pages/User/Dashboard2";
-import Myprofile from "./pages/User/Myprofile";
+import HomeAuth from "./pages/HomeAuth";
 import SignIn from "./pages/Auth/SignIn";
 import HomeDummy from "./pages/HomeDummy";
+
 import AuthLayout from "./layouts/AuthLayout";
-import AppLayout from "@/layouts/coretcoret/AppLayout";
-import UserForm from "./components/UserForm";
+import AppLayout from "./layouts/AppLayout";
+
+function Guard({ role, isGuest }) {
+  const user = useAuthStore((state) => state.user);
+
+  if (isGuest && user) {
+    return <Navigate to={user.role === "admin" ? "/admin" : "/user"} replace />;
+  }
+
+  if (!isGuest && !user) {
+    return <Navigate to="/signin" replace />;
+  }
+
+  if (!isGuest && role && user?.role !== role) {
+    return <Navigate to={user.role === "admin" ? "/admin" : "/user"} replace />;
+  }
+
+  return <Outlet />;
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeDummy />,
   },
   {
-    element: <AuthLayout />,
+    element: <Guard isGuest />,
     children: [
       {
-        path: "signin",
-        element: <SignIn />,
-      },
-    ],
-  },
-  {
-    path: "/admin",
-    element: <AppLayout />,
-    children: [
-      {
-        index: true,
-        element: <Home />,
-      },
-      {
-        path: "about",
-        element: <About />,
-      },
-      {
-        path: "santri",
-        element: <SantriLayout />,
+        element: <AuthLayout />,
         children: [
           {
-            index: true,
-            element: <Santri />,
-          },
-          {
-            path: "nilai",
-            element: <SantriNilai />,
-          },
-          {
-            path: "list",
-            children: [
-              {
-                index: true,
-                element: <SantriList />,
-              },
-              {
-                path: ":santri_id",
-                element: <SantriDetail />,
-              },
-            ],
-          },
-          {
-            path: "absensi",
-            element: <SantriAbsensi />,
+            path: "signin",
+            element: <SignIn />,
           },
         ],
       },
     ],
   },
   {
-    path: "/user",
+    path: "/admin",
+    element: <Guard role="admin" />,
     children: [
       {
-        index: true,
-        element: (
-          <>
-            
-            <Dashboard2 />
-            <UserForm />
-            <Myprofile />
-          </>
-        ),
+        element: <AppLayout />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: "about", element: <About /> },
+          {
+            path: "santri",
+            element: <SantriLayout />,
+            children: [
+              { index: true, element: <Santri /> },
+              { path: "nilai", element: <SantriNilai /> },
+              { path: "absensi", element: <SantriAbsensi /> },
+              {
+                path: "list",
+                children: [
+                  { index: true, element: <SantriList /> },
+                  { path: ":santri_id", element: <SantriDetail /> },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    path: "/user",
+    element: <Guard role="user" />,
+    children: [
+      { index: true, element: <HomeAuth /> },
+      {
+        path: "about",
+        element: <div className="text-xl font-bold">Halaman About User</div>,
+      },
+      {
+        path: "contact",
+        element: <div className="text-xl font-bold">Halaman Contact User</div>,
       },
     ],
   },

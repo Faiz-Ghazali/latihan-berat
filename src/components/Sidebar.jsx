@@ -8,15 +8,26 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
-import { GraduationCap, Home, Info, Users } from "lucide-react";
+import { useNavigate } from "react-router";
+import { GraduationCap, Home, Info, Mail } from "lucide-react";
+import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
+import { useAuthStore } from "../pages/Auth/store/useAuthStore";
 
-const navItems = [
-  { to: "/admin", label: "Home", icon: Home, end: true },
-  { to: "santri", label: "Santri", icon: Users },
+// List menu default: Home, About, Contact
+const defaultNavItems = [
+  { to: "/user", label: "Home", icon: Home, end: true },
   { to: "about", label: "About", icon: Info },
+  { to: "contact", label: "Contact", icon: Mail },
 ];
 
-function AppSidebar() {
+function AppSidebar({ items = defaultNavItems }) {
+  const logout = useAuthStore((state) => state.logout);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/", { replace: true });
+  };
   return (
     <Sidebar>
       <SidebarHeader>
@@ -26,13 +37,22 @@ function AppSidebar() {
               size={16}
               className="text-sidebar-primary-foreground"
             />
+            <Button
+        variant="ghost"
+        size="sm"
+        onClick={handleLogout}
+        className="gap-2 text-red-500 hover:text-red-600 hover:bg-red-500/10"
+      >
+        <LogOut size={16} />
+        Sign Out
+      </Button>
           </div>
           <div className="flex flex-col">
             <span className="text-sm font-semibold text-sidebar-foreground leading-tight">
-              SantriApp
+              Learn React
             </span>
             <span className="text-xs text-sidebar-foreground/60 leading-tight">
-              Manajemen Santri
+              User Portal
             </span>
           </div>
         </div>
@@ -40,7 +60,7 @@ function AppSidebar() {
 
       <SidebarContent>
         <SidebarMenu>
-          {navItems.map((item) => (
+          {items.map((item) => (
             <SidebarMenuItem key={item.to}>
               <NavLink to={item.to} end={item.end} className="w-full">
                 {({ isActive }) => (
@@ -57,7 +77,7 @@ function AppSidebar() {
 
       <SidebarFooter>
         <div className="px-2 py-2 text-xs text-sidebar-foreground/50 text-center">
-          © {new Date().getFullYear()} SantriApp
+          © {new Date().getFullYear()} Learn React
         </div>
       </SidebarFooter>
     </Sidebar>
