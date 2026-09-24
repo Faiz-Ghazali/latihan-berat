@@ -20,41 +20,49 @@ const chartBars = [52, 64, 58, 80, 77, 92, 86, 98];
 
 export default function PerformaAnalytic() {
   return (
-    <div className="space-y-6 rounded-2xl border border-slate-700/70 bg-slate-950/70 p-4 shadow-2xl shadow-slate-950/30 sm:p-6">
-      <div className="flex flex-col gap-4 border-b pb-6 sm:flex-row sm:items-center sm:justify-between">
+    <div className="space-y-6 rounded-2xl border border-sky-500/20 bg-slate-950/80 p-4 shadow-2xl shadow-slate-950/30 sm:p-6">
+      <div className="flex flex-col gap-4 border-b border-slate-700 pb-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Badge
             variant="outline"
-            className="border-violet-500/30 bg-violet-50 text-violet-700"
+            className="border-violet-400/40 bg-violet-950/60 text-violet-200"
           >
-            <Activity className="mr-1 size-3" /> Analytics
+            <Activity className="mr-1 size-3 text-violet-300" /> Analytics
           </Badge>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-white">
             Analisis Performa
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-sky-100/75">
             Pantau performa operasional, pertumbuhan penjualan, dan efektivitas
             katalog.
           </p>
         </div>
 
-        <Button size="sm" className="gap-2 bg-violet-600 hover:bg-violet-500">
+        <Button
+          size="sm"
+          className="gap-2 bg-violet-500 text-white hover:bg-violet-400"
+        >
           <TrendingUp className="size-4" /> Lihat Laporan
         </Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         {performanceData.map((item) => (
-          <Card key={item.label} className="border-border/60 shadow-sm">
+          <Card
+            key={item.label}
+            className="border-slate-700 bg-slate-900/80 shadow-sm"
+          >
             <CardHeader className="pb-2">
-              <CardTitle className="text-xs font-medium text-muted-foreground">
+              <CardTitle className="text-xs font-medium text-sky-100/80">
                 {item.label}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex items-end justify-between gap-2">
-                <span className="text-2xl font-bold">{item.value}</span>
-                <span className="text-xs font-medium text-emerald-600">
+                <span className="text-2xl font-bold text-white">
+                  {item.value}
+                </span>
+                <span className="text-xs font-medium text-emerald-300">
                   {item.delta}
                 </span>
               </div>
@@ -64,37 +72,37 @@ export default function PerformaAnalytic() {
       </div>
 
       <div className="grid gap-6 lg:grid-cols-3">
-        <Card className="lg:col-span-2 border-border/60 shadow-sm">
+        <Card className="lg:col-span-2 border-slate-700 bg-slate-900/80 shadow-sm">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-base font-semibold">
+                <CardTitle className="text-base font-semibold text-white">
                   Trend Kinerja Mingguan
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className="text-sky-100/70">
                   Performa katalog mobil dalam 8 pekan terakhir
                 </CardDescription>
               </div>
               <Badge
                 variant="secondary"
-                className="bg-emerald-50 text-emerald-700"
+                className="border-emerald-400/40 bg-emerald-500/10 text-emerald-300"
               >
                 +18.5%
               </Badge>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="mt-4 flex h-56 items-end gap-3 rounded-xl border bg-muted/20 p-4">
+            <div className="mt-4 flex h-56 items-end gap-3 rounded-xl border border-slate-700 bg-slate-950/60 p-4">
               {chartBars.map((value, index) => (
                 <div
                   key={index}
                   className="flex flex-1 flex-col items-center justify-end gap-2"
                 >
                   <div
-                    className={`w-full rounded-t-md ${index % 2 === 0 ? "bg-violet-500" : "bg-violet-300"}`}
+                    className={`w-full rounded-t-md ${index % 2 === 0 ? "bg-cyan-400" : "bg-violet-400"}`}
                     style={{ height: `${value}%` }}
                   />
-                  <span className="text-[10px] text-muted-foreground">
+                  <span className="text-[10px] text-sky-100/80">
                     W{index + 1}
                   </span>
                 </div>
@@ -103,35 +111,37 @@ export default function PerformaAnalytic() {
           </CardContent>
         </Card>
 
-        <Card className="border-border/60 shadow-sm">
+        <Card className="border-slate-700 bg-slate-900/80 shadow-sm">
           <CardHeader>
-            <CardTitle className="text-base font-semibold">
+            <CardTitle className="text-base font-semibold text-white">
               Ringkasan Motor
             </CardTitle>
-            <CardDescription>Indikator prioritas saat ini</CardDescription>
+            <CardDescription className="text-sky-100/70">
+              Indikator prioritas saat ini
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="rounded-lg bg-violet-50 p-3">
-              <div className="flex items-center gap-2 text-violet-700">
+            <div className="rounded-lg border border-violet-400/30 bg-violet-500/10 p-3 text-violet-100">
+              <div className="flex items-center gap-2 text-violet-200">
                 <Gauge className="size-4" />
                 <span className="font-medium">Tingkat Analisis</span>
               </div>
-              <p className="mt-2 text-2xl font-bold">82/100</p>
+              <p className="mt-2 text-2xl font-bold text-white">82/100</p>
             </div>
 
-            <div className="rounded-lg bg-emerald-50 p-3">
-              <div className="flex items-center gap-2 text-emerald-700">
+            <div className="rounded-lg border border-emerald-400/30 bg-emerald-500/10 p-3 text-emerald-100">
+              <div className="flex items-center gap-2 text-emerald-200">
                 <Zap className="size-4" />
                 <span className="font-medium">Efisiensi Operasional</span>
               </div>
-              <p className="mt-2 text-2xl font-bold">89%</p>
+              <p className="mt-2 text-2xl font-bold text-white">89%</p>
             </div>
 
             <Button
               variant="outline"
-              className="w-full justify-between text-sm"
+              className="w-full justify-between border-cyan-400/40 bg-slate-950 text-cyan-100 hover:bg-sky-500/10 hover:text-white text-sm"
             >
-              Export laporan <ArrowUpRight className="size-4" />
+              Export laporan <ArrowUpRight className="size-4 text-cyan-300" />
             </Button>
           </CardContent>
         </Card>

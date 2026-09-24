@@ -42,56 +42,62 @@ const garageCars = [
 
 export default function MyGarage() {
   return (
-    <div className="space-y-6 rounded-2xl border border-slate-700/70 bg-slate-950/70 p-4 shadow-2xl shadow-slate-950/30 sm:p-6">
-      <div className="flex flex-col gap-4 border-b pb-6 sm:flex-row sm:items-center sm:justify-between">
+    <div className="space-y-6 rounded-2xl border border-sky-500/20 bg-slate-950/80 p-4 shadow-2xl shadow-slate-950/30 sm:p-6">
+      <div className="flex flex-col gap-4 border-b border-slate-700 pb-6 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <Badge
             variant="outline"
-            className="border-emerald-500/30 bg-emerald-50 text-emerald-700"
+            className="border-emerald-400/40 bg-emerald-950/60 text-emerald-200"
           >
-            <CarFront className="mr-1 size-3" /> My Garage
+            <CarFront className="mr-1 size-3 text-emerald-300" /> My Garage
           </Badge>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-white">
             Garasi Saya
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-sky-100/75">
             Pantau kondisi kendaraan, status pemesanan, dan jadwal perawatan
             mobil Anda.
           </p>
         </div>
 
-        <Button size="sm" className="gap-2 bg-emerald-600 hover:bg-emerald-500">
+        <Button
+          size="sm"
+          className="gap-2 bg-emerald-500 text-white hover:bg-emerald-400"
+        >
           <Plus className="size-4" /> Tambah Mobil
         </Button>
       </div>
 
       <div className="grid gap-4 md:grid-cols-3">
-        <Card className="border-border/60 shadow-sm">
+        <Card className="border-slate-700 bg-slate-900/80 shadow-sm">
           <CardContent className="p-4">
-            <p className="text-xs text-muted-foreground">Total Kendaraan</p>
-            <div className="mt-2 text-2xl font-bold">24</div>
+            <p className="text-xs text-sky-100/70">Total Kendaraan</p>
+            <div className="mt-2 text-2xl font-bold text-white">24</div>
           </CardContent>
         </Card>
-        <Card className="border-border/60 shadow-sm">
+        <Card className="border-slate-700 bg-slate-900/80 shadow-sm">
           <CardContent className="p-4">
-            <p className="text-xs text-muted-foreground">Siap Dipakai</p>
-            <div className="mt-2 text-2xl font-bold">17</div>
+            <p className="text-xs text-sky-100/70">Siap Dipakai</p>
+            <div className="mt-2 text-2xl font-bold text-white">17</div>
           </CardContent>
         </Card>
-        <Card className="border-border/60 shadow-sm">
+        <Card className="border-slate-700 bg-slate-900/80 shadow-sm">
           <CardContent className="p-4">
-            <p className="text-xs text-muted-foreground">Perawatan</p>
-            <div className="mt-2 text-2xl font-bold">5</div>
+            <p className="text-xs text-sky-100/70">Perawatan</p>
+            <div className="mt-2 text-2xl font-bold text-white">5</div>
           </CardContent>
         </Card>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
         {garageCars.map((car) => (
-          <Card key={car.name} className="border-border/60 shadow-sm">
-            <div className="h-32 bg-gradient-to-br from-emerald-100 via-white to-slate-100 p-4">
+          <Card
+            key={car.name}
+            className="border-slate-700 bg-slate-900/80 shadow-sm"
+          >
+            <div className="h-32 bg-gradient-to-br from-sky-900 via-slate-800 to-blue-950 p-4">
               <div className="flex h-full items-start justify-between">
-                <div className="rounded-full bg-white/80 p-2 text-slate-700">
+                <div className="rounded-full bg-sky-500/20 p-2 text-sky-100">
                   <CarFront className="size-5" />
                 </div>
                 <Badge className={`border ${car.accent}`}>{car.status}</Badge>
@@ -99,27 +105,30 @@ export default function MyGarage() {
             </div>
             <CardContent className="space-y-4 p-4">
               <div>
-                <h3 className="text-xl font-semibold">{car.name}</h3>
-                <p className="text-sm text-muted-foreground">{car.mileage}</p>
+                <h3 className="text-xl font-semibold text-white">{car.name}</h3>
+                <p className="text-sm text-sky-100/70">{car.mileage}</p>
               </div>
 
-              <div className="space-y-2 text-sm text-slate-600">
+              <div className="space-y-2 text-sm text-sky-100/80">
                 <div className="flex items-center gap-2">
-                  <MapPin className="size-4 text-slate-500" />
+                  <MapPin className="size-4 text-sky-300" />
                   <span>{car.location}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="size-4 text-emerald-600" />
+                  <ShieldCheck className="size-4 text-emerald-300" />
                   <span>Dokumen lengkap dan aman</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Wrench className="size-4 text-amber-600" />
+                  <Wrench className="size-4 text-amber-300" />
                   <span>Servis berikutnya dalam 2 minggu</span>
                 </div>
               </div>
 
-              <Button variant="outline" className="w-full justify-between">
-                Detail Mobil <CircleCheckBig className="size-4" />
+              <Button
+                variant="outline"
+                className="w-full justify-between border-sky-500/40 bg-slate-950 text-sky-100 hover:bg-sky-500/10 hover:text-white"
+              >
+                Detail Mobil <CircleCheckBig className="size-4 text-sky-300" />
               </Button>
             </CardContent>
           </Card>
