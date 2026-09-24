@@ -8,7 +8,7 @@ import {
   CardTitle,
   CardContent,
 } from "@/components/ui/card";
-import { useAuthStore } from "../Auth/store/useAuthStore"; 
+import { useAuthStore } from "../Auth/store/useAuthStore"; // Sesuaikan path store
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -16,20 +16,22 @@ export default function SignIn() {
 
   const login = useAuthStore((state) => state.login);
   const error = useAuthStore((state) => state.error);
-
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
 
+    // Jalankan fungsi login Zustand
     const isSuccess = login(email, password);
 
     if (isSuccess) {
       const currentUser = useAuthStore.getState().user;
-      if (currentUser.role == "admin") {
-        navigate('/admin');
-      } else if (currentUser.role == "user") {
-        navigate('/user')
+      
+      // Navigasi sederhana sesuai role
+      if (currentUser.role === "admin") {
+        navigate("/admin");
+      } else if (currentUser.role === "user") {
+        navigate("/user");
       }
     }
   }

@@ -1,6 +1,5 @@
 // import { Checkbox } from "@/components/ui/checkbox"
 // import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
-
 function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -29,6 +28,9 @@ function Home() {
           </a>
           <a href="#about" className="transition-colors hover:text-foreground">
             About
+          </a>
+          <a href="/signin" className="transition-colors hover:text-foreground">
+            SignIN
           </a>
         </div>
         <a

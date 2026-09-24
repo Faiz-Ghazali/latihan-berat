@@ -5,7 +5,7 @@ import { Textarea } from '@/components/ui/textarea'
 
 function UserForm() {
   return (
-    <div className="mx-auto w-full max-w-md rounded-lg border bg-card p-6 shadow-sm">
+    <div className="mx-auto w-full max-w-lg rounded-lg border bg-card p-4 shadow-sm sm:p-6">
       <div className="mb-6 space-y-1">
         <h2 className="text-2xl font-semibold tracking-tight">Biodata</h2>
         <p className="text-sm text-muted-foreground">
