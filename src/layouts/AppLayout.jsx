@@ -9,7 +9,7 @@ export default function AppLayout() {
       <AppSidebar />
       <SidebarInset>
         <Navbar showSidebar={true} />
-        <main className="flex-1 bg-slate-50 p-6">
+        <main className="flex-1 bg-[#071a2f] p-4 text-slate-100 sm:p-6">
           <Outlet />
         </main>
       </SidebarInset>

@@ -15,18 +15,31 @@ export default function Navbar({ showSidebar = true }) {
   };
 
   return (
-    <nav className="sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between border-b bg-white px-4">
+    <nav className="sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between border-b border-slate-700 bg-[#0b1f3a] px-4 text-slate-100">
       <div className="flex items-center gap-3">
-        {showSidebar && <SidebarTrigger />}
-        <span className="font-semibold text-slate-800">AutoBase Portal</span>
+        {showSidebar && (
+          <SidebarTrigger className="text-slate-100 hover:bg-slate-800" />
+        )}
+        <span className="font-semibold text-white">AutoBase Portal</span>
       </div>
 
       <div className="flex items-center gap-3">
-        <span className="text-xs font-medium text-slate-600">Halo, {user?.name || "Driver"}</span>
-        <Button variant="ghost" size="icon" className="size-8 text-slate-500">
+        <span className="text-xs font-medium text-slate-200">
+          Halo, {user?.name || "Driver"}
+        </span>
+        <Button
+          variant="ghost"
+          size="icon"
+          className="size-8 text-slate-200 hover:bg-slate-800 hover:text-white"
+        >
           <Bell className="size-4" />
         </Button>
-        <Button variant="ghost" size="sm" onClick={handleLogout} className="gap-2 text-red-500 hover:bg-red-50 hover:text-red-600">
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={handleLogout}
+          className="gap-2 text-slate-200 hover:bg-slate-800 hover:text-white"
+        >
           <LogOut size={16} /> Logout
         </Button>
       </div>

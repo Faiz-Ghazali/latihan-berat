@@ -2,6 +2,9 @@ import { createBrowserRouter, Navigate, Outlet } from "react-router";
 import { useAuthStore } from "./pages/Auth/store/useAuthStore";
 
 import Home from "./pages/Admin/Home";
+import Catalog from "./pages/Admin/Catalog";
+import PerformaAnalytic from "./pages/Admin/PerformaAnalytic";
+import MyGarage from "./pages/Admin/MyGarage";
 import About from "./pages/Admin/About";
 import Santri from "./pages/Admin/Santri";
 import SantriLayout from "./layouts/SantriLayout";
@@ -61,6 +64,9 @@ const router = createBrowserRouter([
         element: <AppLayout />,
         children: [
           { index: true, element: <Home /> },
+          { path: "catalog", element: <Catalog /> },
+          { path: "performa", element: <PerformaAnalytic /> },
+          { path: "mygarage", element: <MyGarage /> },
           { path: "about", element: <About /> },
           {
             path: "santri",

@@ -6,8 +6,8 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { useAuthStore } from "./store/useAuthStore";
 
 export default function SignIn() {
-  const [email, setEmail] = useState("user@autobase.com");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const login = useAuthStore((state) => state.login);
   const error = useAuthStore((state) => state.error);
