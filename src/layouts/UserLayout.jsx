@@ -1,7 +1,18 @@
-export default function UserLayout({ children }) {
+import { Outlet } from "react-router";
+import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/Sidebar";
+import Navbar from "@/components/Navbar";
+
+export default function UserLayout() {
   return (
-    <main className="min-h-screen w-full bg-slate-50 px-4 py-6 text-slate-800 sm:px-8">
-      <div className="mx-auto max-w-6xl">{children}</div>
-    </main>
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarInset>
+        <Navbar showSidebar={true} />
+        <main className="flex-1 bg-[#071a2f] p-4 text-slate-100 sm:p-6">
+          <Outlet />
+        </main>
+      </SidebarInset>
+    </SidebarProvider>
   );
 }

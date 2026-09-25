@@ -1,52 +1,110 @@
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
+import { useState } from "react";
+import { User, Heart, Mail, MapPin, CheckCircle } from "lucide-react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-function UserForm() {
+export default function UserForm() {
+  const [formData, setFormData] = useState({
+    nama: "",
+    hobi: "",
+    email: "",
+    alamat: "",
+  });
+  const [isSaved, setIsSaved] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSaved(true);
+    setTimeout(() => setIsSaved(false), 3000);
+  };
+
   return (
-    <div className="w-full rounded-lg border bg-card p-4 shadow-sm sm:p-6 text-left">
-      <div className="mb-6 space-y-1">
-        <h2 className="text-2xl font-semibold tracking-tight text-left">Biodata</h2>
-        <p className="text-sm text-muted-foreground text-left">
-          Enter your personal information.
-        </p>
-      </div>
+    <Card className="mx-auto w-full max-w-xl border-border/60 shadow-sm">
+      <CardHeader>
+        <CardTitle className="text-xl font-bold">Data Diri Pengguna</CardTitle>
+        <CardDescription>
+          Isi informasi profil Anda untuk pengalaman database mobil yang personal.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        {isSaved && (
+          <div className="mb-4 flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-50 p-3 text-xs font-medium text-emerald-700">
+            <CheckCircle className="size-4 shrink-0" />
+            Data berhasil disimpan!
+          </div>
+        )}
 
-      <form className="space-y-4">
-        <div className="space-y-2 text-left">
-          <Label htmlFor="name" className="block text-left">Name</Label>
-          <Input id="name" name="name" placeholder="Your name" required />
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Input Nama */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+              <User className="size-3.5 text-muted-foreground" /> Nama Lengkap
+            </label>
+            <Input
+              type="text"
+              name="nama"
+              placeholder="Contoh: Budi Pratama"
+              value={formData.nama}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="space-y-2 text-left">
-          <Label htmlFor="email" className="block text-left">Email</Label>
-          <Input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="you@example.com"
-            required
-          />
-        </div>
+          {/* Input Hobi */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+              <Heart className="size-3.5 text-muted-foreground" /> Hobi Otomotif / Lainnya
+            </label>
+            <Input
+              type="text"
+              name="hobi"
+              placeholder="Contoh: Restorasi Mobil Klasik, Touring"
+              value={formData.hobi}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <div className="space-y-2 text-left">
-          <Label htmlFor="address" className="block text-left">Address</Label>
-          <Textarea
-            id="address"
-            name="address"
-            placeholder="Your address"
-            rows={4}
-            required
-          />
-        </div>
+          {/* Input Email */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+              <Mail className="size-3.5 text-muted-foreground" /> Alamat Email
+            </label>
+            <Input
+              type="email"
+              name="email"
+              placeholder="nama@email.com"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        <Button type="submit" className="w-full sm:w-auto">
-          Save biodata
-        </Button>
-      </form>
-    </div>
-  )
+          {/* Input Alamat */}
+          <div className="space-y-1.5">
+            <label className="text-xs font-semibold text-foreground flex items-center gap-1.5">
+              <MapPin className="size-3.5 text-muted-foreground" /> Alamat Lengkap
+            </label>
+            <Input
+              type="text"
+              name="alamat"
+              placeholder="Jl. Sudirman No. 12, Jakarta"
+              value={formData.alamat}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 mt-2">
+            Simpan Data
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
 }
-
-export default UserForm

@@ -15,9 +15,11 @@ import SantriDetail from "./pages/Admin/Santri/SantriDetail";
 import HomeAuth from "./pages/HomeAuth";
 import SignIn from "./pages/Auth/SignIn";
 import HomeDummy from "./pages/HomeDummy";
+import UserForm from "./components/UserForm";
 
 import AuthLayout from "./layouts/AuthLayout";
 import AppLayout from "./layouts/AppLayout";
+import UserLayout from "./layouts/UserLayout";
 
 function Guard({ role, isGuest }) {
   const user = useAuthStore((state) => state.user);
@@ -93,14 +95,31 @@ const router = createBrowserRouter([
     path: "/user",
     element: <Guard role="user" />,
     children: [
-      { index: true, element: <HomeAuth /> },
       {
-        path: "about",
-        element: <div className="text-xl font-bold">Halaman About User</div>,
-      },
-      {
-        path: "contact",
-        element: <div className="text-xl font-bold">Halaman Contact User</div>,
+        element: <UserLayout />,
+        children: [
+          { index: true, element: <HomeAuth /> },
+          {
+            path: "form",
+            element: <UserForm />,
+          },
+          {
+            path: "katalog",
+            element: <HomeDummy />,
+          },
+          {
+            path: "about",
+            element: (
+              <div className="text-xl font-bold">Halaman About User</div>
+            ),
+          },
+          {
+            path: "contact",
+            element: (
+              <div className="text-xl font-bold">Halaman Contact User</div>
+            ),
+          },
+        ],
       },
     ],
   },

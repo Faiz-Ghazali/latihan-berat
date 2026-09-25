@@ -1,5 +1,6 @@
 {
-  "name": "Project",
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "learnreact",
   "private": true,
   "version": "0.0.0",
   "type": "module",

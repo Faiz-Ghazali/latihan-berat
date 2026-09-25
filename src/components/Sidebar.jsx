@@ -8,20 +8,29 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "./ui/sidebar";
-import { Car, Home, Gauge, Bookmark, LogOut } from "lucide-react";
+import { Car, Home, Gauge, Bookmark, LogOut, UserCheck } from "lucide-react";
 import { Button } from "./ui/button";
 import { useAuthStore } from "../pages/Auth/store/useAuthStore";
 
-const navItems = [
+const adminNavItems = [
   { to: "/admin", label: "Dashboard", icon: Home, end: true },
   { to: "/admin/catalog", label: "Katalog Mobil", icon: Car },
   { to: "/admin/performa", label: "Analisis Performa", icon: Gauge },
   { to: "/admin/mygarage", label: "Garasi Saya", icon: Bookmark },
 ];
 
+const userNavItems = [
+  { to: "/user", label: "Dashboard", icon: Home, end: true },
+  { to: "/user/form", label: "Form Data Diri", icon: UserCheck },
+  { to: "/user/katalog", label: "Katalog Mobil", icon: Car },
+];
+
 export default function AppSidebar() {
   const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
   const navigate = useNavigate();
+
+  const navItems = user?.role === "admin" ? adminNavItems : userNavItems;
 
   const handleLogout = () => {
     logout();
@@ -33,11 +42,13 @@ export default function AppSidebar() {
       <SidebarHeader className="border-b border-slate-700 bg-[#0b1f3a]">
         <div className="flex items-center gap-3 px-3 py-2">
           <div className="flex size-9 items-center justify-center rounded-lg bg-[#1e4d9a] text-white font-bold shadow-md shadow-blue-950/40">
-            🏎️
+            🛻
           </div>
           <div className="flex flex-col">
             <span className="font-bold leading-tight text-white">AutoBase</span>
-            <span className="text-xs text-slate-300">Member Portal</span>
+            <span className="text-xs text-slate-300">
+              {user?.role === "admin" ? "Admin Portal" : "Member Portal"}
+            </span>
           </div>
         </div>
       </SidebarHeader>
